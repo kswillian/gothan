@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="40dp"
             android:fontFamily="@font/roboto_light"
             android:textAlignment="textStart"
@@ -41,12 +41,29 @@
             style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
+            android:textAlignment="textStart"
+            android:text="@string/user_register_name_desc" />
+
+        <EditText
+            android:id="@+id/editTextRegisterName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            style="@style/estilologin" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/estilologin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:textAlignment="textStart"
             android:text="@string/user_register_email_desc" />
 
         <EditText
-            android:id="@+id/cadastroEmail"
+            android:id="@+id/editTextRegisterEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -58,15 +75,15 @@
             style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:text="@string/user_register_pass_desc" />
 
         <EditText
-            android:id="@+id/cadastroSenha"
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             style="@style/estilologin"/>
 
         <TextView
@@ -74,25 +91,26 @@
             style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:text="@string/user_register_pass_c_desc" />
 
         <EditText
-            android:id="@+id/cadastroConfSenha"
+            android:id="@+id/editTextRegisterConfPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             style="@style/estilologin"/>
 
         <Button
-            android:id="@+id/cadastroButtonCadastrar"
+            android:id="@+id/buttonRegisterUser"
             style="@style/botaoLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:background="@color/colorAccent"
             android:textColor="@color/colorWhite"
             android:text="@string/user_register_button_reg" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

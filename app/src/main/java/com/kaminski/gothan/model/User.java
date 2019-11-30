@@ -1,5 +1,9 @@
 package com.kaminski.gothan.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.kaminski.gothan.firebase.Firebase;
+import com.kaminski.gothan.util.Base64;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -82,7 +86,11 @@ public class User implements Serializable {
     }
 
     public void register(){
-
+        DatabaseReference databaseReference = Firebase.getFirebase();
+        databaseReference
+                .child("users")
+                .child(Base64.encodeBase64(this.id))
+                .setValue(this);
     }
 
     @Override

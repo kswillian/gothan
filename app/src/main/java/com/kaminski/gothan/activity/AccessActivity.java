@@ -19,7 +19,6 @@ public class AccessActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 

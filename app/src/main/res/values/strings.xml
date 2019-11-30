@@ -15,6 +15,26 @@
 
     <string name="title_activity_maps"></string>
 
+    <!-- Exception -->
+    <string name="ex_user_register_name">Nome inválido!</string>
+    <string name="ex_user_register_email">E-mail inválido!</string>
+    <string name="ex_user_register_password">Senha inválida!</string>
+    <string name="ex_user_register_password_conf">Confirme sua senha!</string>
+    <string name="ex_user_register_password_size">Senha com no mínimo 6 caracteres!</string>
+    <string name="ex_user_register_password_validate">As senhas não coincidem!</string>
+
+    <!-- Firebase Exception -->
+    <string name="firebase_register_pass">Digite uma senha mais forte!</string>
+    <string name="firebase_register_email">Por favor, digite um e-mail válido!</string>
+    <string name="firebase_register_acount">Esta conta já está cadastrada!</string>
+
+    <!-- Alert -->
+    <string name="alert_error_register_title">Erro ao cadastrar</string>
+    <string name="alert_error_login_title">Erro ao acessar</string>
+    <string name="alert_sucess_register_title">Sucesso</string>
+    <string name="alert_sucess_register_dec">Cadastro efetuado com sucesso!</string>
+    <string name="alert_neutral_button">OK</string>
+
     <!-- Activity Access -->
     <string name="access_tittle">Crie uma conta grátis</string>
     <string name="access_description">Junte-se a nossa comunidade e ajude a nossa cidade ser mais segura.</string>
@@ -22,13 +42,16 @@
     <string name="access_have_acount">Já tenho uma conta</string>
 
     <!-- Activity Login -->
-    <string name="login_tittle">Acesse sua conta</string>
     <string name="login_email">E-mail</string>
     <string name="login_senha">Senha</string>
     <string name="login_access">Acessar</string>
+    <string name="ex_login">Erro ao efetuar login!</string>
+    <string name="ex_login_access">Usuário não cadastrado!</string>
+    <string name="ex_login_auth">E-mail ou senha não correspondem a um usuário cadastrado!</string>
 
     <!-- Activity Register User -->
     <string name="user_register_title">Cadastro</string>
+    <string name="user_register_name_desc">Insira seu nome</string>
     <string name="user_register_email_desc">Insira seu e-mail</string>
     <string name="user_register_pass_desc">Crie uma senha</string>
     <string name="user_register_pass_c_desc">Confirme sua senha</string>
