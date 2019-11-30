@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1006809708903",
+    "firebase_url": "https://senai-gothan-1574898698860.firebaseio.com",
+    "project_id": "senai-gothan-1574898698860",
+    "storage_bucket": "senai-gothan-1574898698860.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006809708903:android:22c56582687442f64bd7c2",
+        "android_client_info": {
+          "package_name": "com.kaminski.gothan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006809708903-pv81c4cdmu4372bhuakqvb8u5og12p3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kaminski.gothan",
+            "certificate_hash": "24b2ef22ff76689c489a87dac137c3b49ec360c6"
+          }
+        },
+        {
+          "client_id": "1006809708903-s3i5emg9g6blspa6p7ar8720vf4i291r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7ADoZ8sIcpa-KfJbCBrgxnQDpInf-rXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006809708903-s3i5emg9g6blspa6p7ar8720vf4i291r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
