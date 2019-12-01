@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,13 +13,18 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.kaminski.gothan.R;
 import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.fragment.AboutFragment;
 import com.kaminski.gothan.fragment.ConfigurationFragment;
 import com.kaminski.gothan.fragment.HomeFragment;
 import com.kaminski.gothan.fragment.OcurrencesFragment;
+import com.kaminski.gothan.model.User;
+import com.kaminski.gothan.util.Base64Custom;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -27,13 +33,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FrameLayout frameLayout;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+
+    private TextView textMenuEmail;
+    private TextView textMenuUser;
+    private User userCurrent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         firebaseAuth = Firebase.getFirebaseAuth();
         databaseReference = Firebase.getFirebase();
+
+        initComponent();
 
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -149,10 +163,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    public void initComponent(){
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        textMenuUser = headerView.findViewById(R.id.textMenuUserName);
+        textMenuEmail = headerView.findViewById(R.id.textMenuUserEmail);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
 
+        firebaseAuth = Firebase.getFirebaseAuth();
+        databaseReference = Firebase.getFirebase();
 
+        final DatabaseReference users = databaseReference.child("users");
+        DatabaseReference searchUser = users.child(Base64Custom.encodeBase64(firebaseAuth.getCurrentUser().getEmail()));
+
+        searchUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userCurrent = dataSnapshot.getValue(User.class);
+
+                if(userCurrent != null) {
+                    textMenuUser.setText(userCurrent.getName());
+                    textMenuEmail.setText(userCurrent.getEmail());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 }
