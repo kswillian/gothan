@@ -14,8 +14,56 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:context=".activity.MapsActivity" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonMapLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_my_location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonMapLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu_colorNormal="@color/colorGray"
+        app:menu_icon="@drawable/ic_info_outline">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_coringa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="@color/colorGray"
+            app:fab_colorPressed="@color/colorGray"
+            app:fab_colorRipple="@color/colorGray"
+            app:fab_label="Assaltos"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_pinguin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="@color/colorGray"
+            app:fab_colorPressed="@color/colorGray"
+            app:fab_colorRipple="@color/colorGray"
+            app:fab_label="Assassinatos"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
