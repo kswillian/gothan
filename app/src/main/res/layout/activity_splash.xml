@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroung"
-    tools:context=".activity.SplashActivity">
+    tools:context=".activity.SplashActivity"
+    android:background="@drawable/backgroung">
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="245dp"
-        android:layout_height="308dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/splashLogo"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/logo" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

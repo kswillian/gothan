@@ -1,6 +1,6 @@
 package com.kaminski.gothan.util;
 
-public class Base64 {
+public class Base64Custom {
 
     public static String encodeBase64(String t){
         return android.util.Base64.encodeToString(t.getBytes(), android.util.Base64.DEFAULT).replaceAll("(\\n|\\r)","");

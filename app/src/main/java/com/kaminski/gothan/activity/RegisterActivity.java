@@ -1,12 +1,13 @@
 package com.kaminski.gothan.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,7 +25,7 @@ import com.kaminski.gothan.R;
 import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.model.User;
 import com.kaminski.gothan.util.Alert;
-import com.kaminski.gothan.util.Base64;
+import com.kaminski.gothan.util.Base64Custom;
 import com.kaminski.gothan.util.Validation;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -107,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 throw new Exception(getResources().getString(R.string.ex_user_register_password_validate));
             }
 
-            user.setId(Base64.encodeBase64(user.getEmail()));
+            user.setId(Base64Custom.encodeBase64(user.getEmail()));
             user.setCpf("");
             user.setImgUrl("");
             user.setYearsOld(0);
@@ -141,7 +142,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
 
                     user.register();
-                    clear();
 
                     AlertDialog.Builder msg = new AlertDialog.Builder(RegisterActivity.this);
                     msg.setTitle(getResources().getString(R.string.alert_sucess_register_title));
@@ -153,6 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                    msg.show();
 
                 }else{
 
@@ -189,7 +190,12 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                     }catch (Exception e) {
-                        e.printStackTrace();
+                        Alert.showAlert(
+                                RegisterActivity.this,
+                                getResources().getString(R.string.alert_error_register_title),
+                                e.getMessage(),
+                                getResources().getString(R.string.alert_neutral_button)
+                        );
                     }
                 }
             }

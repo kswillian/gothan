@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gothan</string>
+    <string name="app_name">Gotham</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -14,6 +14,9 @@
     <string name="menu_logout">Logout</string>
 
     <string name="title_activity_maps"></string>
+
+    <!-- Erros -->
+    <string name="error">Ops, algo deu errado. verifique a sua conexão com Internet.</string>
 
     <!-- Exception -->
     <string name="ex_user_register_name">Nome inválido!</string>
@@ -56,5 +59,10 @@
     <string name="user_register_pass_desc">Crie uma senha</string>
     <string name="user_register_pass_c_desc">Confirme sua senha</string>
     <string name="user_register_button_reg">Cadastrar</string>
+
+    <!-- Fragment Home -->
+    <string name="home_presentation">Parabéns. Você está usando o Gothan</string>
+    <string name="home_presentation_dec">Cadastro realizado(a) por </string>
+    <string name="home_presentation_dec2">em </string>
 
 </resources>

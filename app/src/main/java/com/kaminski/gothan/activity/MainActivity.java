@@ -9,9 +9,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.kaminski.gothan.R;
+import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.fragment.AboutFragment;
 import com.kaminski.gothan.fragment.ConfigurationFragment;
+import com.kaminski.gothan.fragment.HomeFragment;
 import com.kaminski.gothan.fragment.OcurrencesFragment;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,12 +25,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FrameLayout frameLayout;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        firebaseAuth = Firebase.getFirebaseAuth();
+        databaseReference = Firebase.getFirebase();
 
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -119,11 +127,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout) {
-
+            firebaseAuth.signOut();
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
