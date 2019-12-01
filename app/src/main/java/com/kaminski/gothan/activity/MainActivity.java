@@ -1,7 +1,9 @@
 package com.kaminski.gothan.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,9 @@ import com.kaminski.gothan.fragment.ConfigurationFragment;
 import com.kaminski.gothan.fragment.HomeFragment;
 import com.kaminski.gothan.fragment.OcurrencesFragment;
 import com.kaminski.gothan.model.User;
+import com.kaminski.gothan.util.Alert;
 import com.kaminski.gothan.util.Base64Custom;
+import com.kaminski.gothan.util.Permission;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -46,6 +50,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView textMenuEmail;
     private TextView textMenuUser;
     private User userCurrent;
+
+    private String[] permissions = new String[]{
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.INTERNET
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        firebaseAuth = Firebase.getFirebaseAuth();
+        databaseReference = Firebase.getFirebase();
+
+        final DatabaseReference users = databaseReference.child("users");
+        DatabaseReference searchUser = users.child(Base64Custom.encodeBase64(firebaseAuth.getCurrentUser().getEmail()));
+
+        searchUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userCurrent = dataSnapshot.getValue(User.class);
+
+                if (userCurrent != null) {
+                    textMenuUser.setText(userCurrent.getName());
+                    textMenuEmail.setText(userCurrent.getEmail());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseReference = Firebase.getFirebase();
 
         initComponent();
+
+        // Validate Pemissions
+        Permission.validatePermission(permissions, this, 1);
 
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -173,31 +216,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        firebaseAuth = Firebase.getFirebaseAuth();
-        databaseReference = Firebase.getFirebase();
+        for( int permissionResult : grantResults){
 
-        final DatabaseReference users = databaseReference.child("users");
-        DatabaseReference searchUser = users.child(Base64Custom.encodeBase64(firebaseAuth.getCurrentUser().getEmail()));
+            if(permissionResult == PackageManager.PERMISSION_DENIED){
 
-        searchUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userCurrent = dataSnapshot.getValue(User.class);
-
-                if(userCurrent != null) {
-                    textMenuUser.setText(userCurrent.getName());
-                    textMenuEmail.setText(userCurrent.getEmail());
-                }
+                AlertDialog.Builder msg = new AlertDialog.Builder(MainActivity.this);
+                msg.setTitle(getResources().getString(R.string.alert_permission_title));
+                msg.setMessage(getResources().getString(R.string.alert_permission_desc));
+                msg.setCancelable(false);
+                msg.setPositiveButton(getResources().getString(R.string.alert_confirm_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                msg.show();
 
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+        }
     }
 }

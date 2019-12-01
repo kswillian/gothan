@@ -40,6 +40,11 @@
     <string name="alert_sucess_register_dec">Cadastro efetuado com sucesso!</string>
     <string name="alert_neutral_button">OK</string>
 
+    <!-- Alert Permission -->
+    <string name="alert_permission_title">Permissões negadas</string>
+    <string name="alert_permission_desc">Para continuar utilizando o App é necessário aceitar as permissões</string>
+    <string name="alert_confirm_button">Ok</string>
+
     <!-- Activity Access -->
     <string name="access_tittle">Crie uma conta grátis</string>
     <string name="access_description">Junte-se a nossa comunidade e ajude a nossa cidade ser mais segura.</string>
