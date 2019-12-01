@@ -1,8 +1,10 @@
 package com.kaminski.gothan.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -127,8 +129,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout) {
-            firebaseAuth.signOut();
-            finish();
+
+            AlertDialog.Builder msg = new AlertDialog.Builder(MainActivity.this);
+            msg.setTitle(getResources().getString(R.string.logout_title));
+            msg.setMessage(getResources().getString(R.string.logout_description));
+            msg.setPositiveButton(getResources().getString(R.string.logout_button_yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    firebaseAuth.signOut();
+                    finish();
+                }
+            });
+            msg.setNegativeButton(getResources().getString(R.string.logout_button_no), null);
+            msg.show();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -136,4 +149,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 }
