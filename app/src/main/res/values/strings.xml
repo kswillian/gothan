@@ -65,4 +65,9 @@
     <string name="home_presentation_dec">Cadastro realizado(a) por </string>
     <string name="home_presentation_dec2">em </string>
 
+    <!-- Fragment Home -->
+    <string name="about_title">Sobre</string>
+    <string name="about_description">Aplicativo desenvolvido por alunos do curso de análise e desenvolvimento de sistemas da faculdade de Tecnologia SENAI Porto Alegre,
+        na disciplina de programação de dispositivos móveis (2019/2).</string>
+
 </resources>
