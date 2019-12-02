@@ -40,6 +40,8 @@
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonMapLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu_colorNormal="@color/colorGray"
+        app:fab_colorPressed="@color/colorGray"
+        app:fab_colorRipple="@color/colorGray"
         app:menu_icon="@drawable/ic_info_outline">
 
         <com.github.clans.fab.FloatingActionButton

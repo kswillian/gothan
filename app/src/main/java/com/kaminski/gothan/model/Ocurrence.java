@@ -1,5 +1,8 @@
 package com.kaminski.gothan.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.kaminski.gothan.firebase.Firebase;
+
 import java.io.Serializable;
 
 public class Ocurrence implements Serializable {
@@ -72,7 +75,18 @@ public class Ocurrence implements Serializable {
     }
 
     public void register(){
+        DatabaseReference databaseReference = Firebase.getFirebase();
 
+        databaseReference
+                .child("ocurrences")
+                .child(this.id)
+                .setValue(this);
+
+
+        databaseReference
+                .child("location_global")
+                .child(this.id)
+                .setValue(this);
     }
 
     @Override
