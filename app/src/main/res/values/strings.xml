@@ -78,15 +78,24 @@
     <string name="home_presentation_dec">Cadastro realizado(a) por </string>
     <string name="home_presentation_dec2">em </string>
 
-    <!-- Fragment Home -->
+    <!-- Fragment Obout -->
     <string name="about_title">Sobre</string>
     <string name="about_description">Aplicativo desenvolvido por alunos do curso de análise e desenvolvimento de sistemas da faculdade de Tecnologia SENAI Porto Alegre,
         na disciplina de programação de dispositivos móveis (2019/2).</string>
+
+    <!-- Fragment Obout -->
+    <string name="ocurrence_empty">Você ainda não registro nenhuma ocorrência</string>
 
     <!-- Alert Ocurrence -->
     <string name="alert_ocurrence_title">Nova Ocorrência</string>
     <string name="alert_ocurrence_button_regs">Cadastrar</string>
     <string name="alert_ocurrence_dec">Descrição</string>
+
+    <!-- Alert Delete Ocurrence -->
+    <string name="alert_del_ocu_title">Excluir Ocorrência</string>
+    <string name="alert_del_ocu_desc">Tem certeza que deseja excluir definitivamente a ocorrência?</string>
+    <string name="alert_del_ocu_button_ok">Sim</string>
+    <string name="alert_del_ocu_button_cancel">Cancelar</string>
 
     <string-array name="alert_array">
         <item>Assalto</item>
