@@ -12,7 +12,7 @@
         android:entries="@array/alert_array"/>
 
     <EditText
-        android:id="@+id/editTextOcurrenceDesc"
+        android:id="@+id/editTextAlertOcurrenceDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

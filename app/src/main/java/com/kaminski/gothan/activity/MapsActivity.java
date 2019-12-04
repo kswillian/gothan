@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -27,7 +26,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -38,6 +36,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -48,9 +47,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.maps.android.clustering.ClusterManager;
 import com.kaminski.gothan.R;
 import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.model.Ocurrence;
@@ -58,7 +55,6 @@ import com.kaminski.gothan.util.Base64Custom;
 import com.kaminski.gothan.util.UpdateGlobalLocal;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GeoQueryEventListener {
@@ -114,13 +110,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         locateUser();
-        listOcurrence();
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(final LatLng latLng) {
 
-                initComponentAlertOcurrence();
+
+                AlertDialog.Builder msg = new AlertDialog.Builder(MapsActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+
+                View view = getLayoutInflater().inflate(R.layout.dialog_ocurrence, null);
+                editTextDescriptionOcurrence = view.findViewById(R.id.editTextAlertOcurrenceDesc);
+                spinnerOcurrenceType = view.findViewById(R.id.spinnerOcurrenceType);
 
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                         getApplicationContext(),
@@ -129,14 +130,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerOcurrenceType.setAdapter(adapter);
 
-                AlertDialog.Builder msg = new AlertDialog.Builder(MapsActivity.this);
-                LayoutInflater inflater = getLayoutInflater();
                 msg.setView(inflater.inflate(R.layout.dialog_ocurrence, null));
                 msg.setTitle(getResources().getString(R.string.alert_ocurrence_title));
                 msg.setPositiveButton(getResources().getString(R.string.alert_ocurrence_button_regs), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        registerOcurrence(latLng, "TESTE", "TESTE");
+                        registerOcurrence(latLng, spinnerOcurrenceType.getSelectedItem().toString(), "");
+                        listOcurrence();
                     }
                 });
                 msg.setNegativeButton(getResources().getString(R.string.logout_button_no), null);
@@ -151,12 +151,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         floatingActionButtonInfo = findViewById(R.id.fab);
         floatingActionButtonLocation.setVisibility(View.INVISIBLE);
         floatingActionButtonInfo.setVisibility(View.INVISIBLE);
-    }
-
-    public void initComponentAlertOcurrence() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_ocurrence, null);
-        spinnerOcurrenceType = view.findViewById(R.id.spinnerOcurrenceType);
-        editTextDescriptionOcurrence = view.findViewById(R.id.editTextOcurrenceDesc);
     }
 
     public void initEvent() {
@@ -210,8 +204,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 markerUser = mMap.addMarker(
                         new MarkerOptions().
-                                position(userLocal).
-                                title("Eu estou aqui")
+                                position(userLocal)
+                                .title(firebaseAuth.getCurrentUser().getDisplayName())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.batman))
                 );
 
             }
@@ -276,11 +271,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     Ocurrence ocurrence = ds.getValue(Ocurrence.class);
 
-                    markerOcurrence = mMap.addMarker(
-                            new MarkerOptions()
-                                    .position(new LatLng(ocurrence.getLatitude(), ocurrence.getLongitude()))
-                                    .title(ocurrence.getDescription())
-                    );
+                    switch (ocurrence.getType()){
+                        case "Assalto":
+
+                            markerOcurrence = mMap.addMarker(
+                                    new MarkerOptions()
+                                            .position(new LatLng(ocurrence.getLatitude(), ocurrence.getLongitude()))
+                                            .title(ocurrence.getType())
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coringa))
+                            );
+
+                            break;
+                        case "Delito":
+
+                            markerOcurrence = mMap.addMarker(
+                                    new MarkerOptions()
+                                            .position(new LatLng(ocurrence.getLatitude(), ocurrence.getLongitude()))
+                                            .title(ocurrence.getType())
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.charada))
+                            );
+
+                            break;
+                    }
 
                     // Add circle
                     mMap.addCircle(

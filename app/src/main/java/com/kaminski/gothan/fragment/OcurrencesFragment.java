@@ -1,11 +1,9 @@
 package com.kaminski.gothan.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -18,17 +16,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kaminski.gothan.R;
-import com.kaminski.gothan.activity.MainActivity;
 import com.kaminski.gothan.adapter.Adapter;
 import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.model.Ocurrence;
@@ -59,15 +54,16 @@ public class OcurrencesFragment extends Fragment {
 
         initCompenent(view);
         configRecycler(view);
-        findOcurrences();
         initEvent();
         return view;
     }
 
     @Override
     public void onResume() {
-        isEmpty();
         super.onResume();
+        ocurrenceList.clear();
+        findOcurrences();
+        isEmpty();
     }
 
     public void initCompenent(View view){
@@ -133,10 +129,9 @@ public class OcurrencesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     ocurrenceList.add(ds.getValue(Ocurrence.class));
+                    isEmpty();
                 }
                 adapter.notifyDataSetChanged();
-
-                isEmpty();
             }
 
             @Override
@@ -148,7 +143,6 @@ public class OcurrencesFragment extends Fragment {
     }
 
     public void deleteOcurrence(String ocurrenceId){
-
         DatabaseReference databaseRef = Firebase.getFirebase();
         DatabaseReference databaseReferenceGlobal = databaseRef.child("location_global");
         DatabaseReference databaseReferenceOcurrence = databaseRef.child("ocurrences");

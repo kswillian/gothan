@@ -36,34 +36,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
+        app:menu_showShadow="false"
+        app:menu_colorNormal="#DA4336"
+        app:menu_colorPressed="#E75043"
+        app:menu_colorRipple="#99FFFFFF"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonMapLocation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu_colorNormal="@color/colorGray"
-        app:fab_colorPressed="@color/colorGray"
-        app:fab_colorRipple="@color/colorGray"
+        app:menu_labels_colorNormal="#333333"
+        app:menu_labels_colorPressed="#444444"
+        app:menu_labels_colorRipple="#66FFFFFF"
         app:menu_icon="@drawable/ic_info_outline">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item_coringa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/charada"
+            app:rippleColor="@color/colorGray"
             app:fab_colorNormal="@color/colorGray"
             app:fab_colorPressed="@color/colorGray"
             app:fab_colorRipple="@color/colorGray"
-            app:fab_label="Assaltos"
+            app:fab_label="Delitos"
             app:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item_pinguin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/coringa"
             app:fab_colorNormal="@color/colorGray"
             app:fab_colorPressed="@color/colorGray"
             app:fab_colorRipple="@color/colorGray"
-            app:fab_label="Assassinatos"
+            app:fab_label="Assaltos"
             app:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
