@@ -36,7 +36,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Ocurrence ocurrence = ocurrenceList.get(position);
-        holder.icon.setImageResource(R.mipmap.ic_launcher);
+
+        switch (ocurrence.getType()){
+            case "Assalto":
+                holder.icon.setImageResource(R.drawable.coringa);
+                break;
+            case "Delito":
+                holder.icon.setImageResource(R.drawable.charada);
+                break;
+                default:
+                    holder.icon.setImageResource(R.mipmap.ic_launcher);
+        }
+
         holder.type.setText(ocurrence.getType());
         holder.description.setText(ocurrence.getDescription());
     }

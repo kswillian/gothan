@@ -100,7 +100,6 @@
     <string-array name="alert_array">
         <item>Assalto</item>
         <item>Assassinatos</item>
-        <item>Array Item Three</item>
     </string-array>
 
 </resources>
