@@ -86,7 +86,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private ArrayList<LatLng> dangerousArea;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,7 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         registerOcurrence(latLng, spinnerOcurrenceType.getSelectedItem().toString(), "");
-                        listOcurrence();
                     }
                 });
                 msg.setNegativeButton(getResources().getString(R.string.logout_button_no), null);
@@ -189,13 +187,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
 
+                listOcurrence();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
                 userLocal = new LatLng(latitude, longitude);
                 visibilityFloatActions();
-
-                listOcurrence();
 
                 UpdateGlobalLocal.updatelocation(
                         Base64Custom.encodeBase64(firebaseAuth.getCurrentUser().getEmail()),
@@ -206,6 +203,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (markerUser != null) {
                     markerUser.remove();
                 }
+
+                listOcurrence();
 
                 markerUser = mMap.addMarker(
                         new MarkerOptions().
@@ -244,7 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void moveCameraToUserLocation() {
         LatLng coordinate = new LatLng(latitude, longitude);
-        CameraUpdate myLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 20);
+        CameraUpdate myLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18);
         mMap.animateCamera(myLocation);
     }
 
@@ -385,7 +384,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onKeyExited(String key) {
-        sendNotification("Gothan", "Deixando uma zona de perigo!");
+        //sendNotification("Gothan", "Deixando uma zona de perigo!");
     }
 
     @Override
