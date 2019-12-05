@@ -34,6 +34,15 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="estilohome">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

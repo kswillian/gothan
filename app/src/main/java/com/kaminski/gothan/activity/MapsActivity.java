@@ -14,6 +14,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
@@ -21,6 +22,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -40,6 +42,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -110,6 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         locateUser();
+
+        addStyle(mMap);
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
@@ -206,7 +211,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         new MarkerOptions().
                                 position(userLocal)
                                 .title(firebaseAuth.getCurrentUser().getDisplayName())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.batman))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_batman))
                 );
 
             }
@@ -278,7 +283,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     new MarkerOptions()
                                             .position(new LatLng(ocurrence.getLatitude(), ocurrence.getLongitude()))
                                             .title(ocurrence.getType())
-                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coringa))
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coringa))
                             );
 
                             break;
@@ -288,7 +293,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     new MarkerOptions()
                                             .position(new LatLng(ocurrence.getLatitude(), ocurrence.getLongitude()))
                                             .title(ocurrence.getType())
-                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.charada))
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_charada))
                             );
 
                             break;
@@ -315,6 +320,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+    }
+
+    public void addStyle(GoogleMap mMap){
+
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if (!success) {
+                Log.e("MAP", "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("MAP", "Can't find style. Error: ", e);
+        }
     }
 
     public void settiongGeofire(){

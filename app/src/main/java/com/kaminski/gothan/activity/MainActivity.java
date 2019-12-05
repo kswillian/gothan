@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_container, homeFragment);
         fragmentTransaction.commit();
+
+        getSupportActionBar().setElevation(0);
     }
 
     @Override
@@ -140,9 +142,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
 
+        /*
         if (id == R.id.action_settings) {
             return true;
         }
+
+         */
 
         return super.onOptionsItemSelected(item);
     }

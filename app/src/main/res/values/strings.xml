@@ -74,9 +74,11 @@
     <string name="logout_button_no">Cancelar</string>
 
     <!-- Fragment Home -->
-    <string name="home_presentation">Parabéns. Você está usando o Gothan</string>
-    <string name="home_presentation_dec">Cadastro realizado(a) por </string>
-    <string name="home_presentation_dec2">em </string>
+    <string name="home">Home</string>
+    <string name="home_batman">O icone do Batman representa onde você está no mapa.</string>
+    <string name="home_coringa">O coringa representa ocorrencias de assalto.</string>
+    <string name="home_charada">O charada representa ocorrencias de elementos suspeitos.</string>
+    <string name="home_button">Ir para o mapa</string>
 
     <!-- Fragment Obout -->
     <string name="about_title">Sobre</string>
@@ -85,6 +87,14 @@
 
     <!-- Fragment Obout -->
     <string name="ocurrence_empty">Você ainda não registro nenhuma ocorrência</string>
+
+    <!-- Fragment Configuation -->
+    <string name="configuration_title">Alteração de cadastro</string>
+    <string name="configuration_new_name">Novo nome</string>
+    <string name="configuration_new_email">Novo endereço de email</string>
+    <string name="configuration_new_password">Nova senha</string>
+    <string name="configuration_conf_password">Confirme sua nova senha</string>
+    <string name="configuration_save">Salvar</string>
 
     <!-- Alert Ocurrence -->
     <string name="alert_ocurrence_title">Nova Ocorrência</string>
