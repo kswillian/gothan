@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -45,7 +45,7 @@
             android:text="@string/configuration_new_name" />
 
         <EditText
-            android:id="@+id/alteraEmai"
+            android:id="@+id/editTextNewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -62,12 +62,12 @@
             android:text="@string/configuration_new_email" />
 
         <EditText
-            android:id="@+id/alteraEmail"
+            android:id="@+id/editTextNewEmail"
+            style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            style="@style/estilologin" />
+            android:inputType="textWebEmailAddress|textEmailSubject" />
 
         <TextView
             android:id="@+id/textView6"
@@ -78,12 +78,12 @@
             android:text="@string/configuration_new_password" />
 
         <EditText
-            android:id="@+id/alteraSenha"
+            android:id="@+id/editTextNewPassword"
+            style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            style="@style/estilologin"/>
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/textView7"
@@ -94,21 +94,22 @@
             android:text="@string/configuration_conf_password" />
 
         <EditText
-            android:id="@+id/alteraConfSenha"
+            android:id="@+id/editTextNewPasswordConf"
+            style="@style/estilologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            style="@style/estilologin"/>
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/alteraButtonCadastrar"
+            android:id="@+id/buttonAlterRegister"
             style="@style/botaoLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorAccent"
-            android:textColor="@color/colorWhite"
-            android:text="@string/configuration_save" />
+            android:text="@string/configuration_save"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
