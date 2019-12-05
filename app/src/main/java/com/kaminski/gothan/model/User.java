@@ -1,10 +1,23 @@
 package com.kaminski.gothan.model;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+import com.kaminski.gothan.R;
+import com.kaminski.gothan.activity.MainActivity;
 import com.kaminski.gothan.firebase.Firebase;
 import com.kaminski.gothan.util.Base64Custom;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class User implements Serializable {
 
@@ -90,6 +103,37 @@ public class User implements Serializable {
                 .child("users")
                 .child(Base64Custom.encodeBase64(this.email))
                 .setValue(this);
+    }
+
+    public void update(final Resources resources, final Context context){
+        DatabaseReference databaseReference = Firebase.getFirebase();
+        DatabaseReference ref = databaseReference.child("users").child(this.id);
+        Map<String, Object> map = toMap();
+        ref.updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                AlertDialog.Builder msg = new AlertDialog.Builder(context);
+                msg.setTitle(resources.getString(R.string.alert_sucess_register_title));
+                msg.setMessage(resources.getString(R.string.alert_sucess_register_update));
+                msg.setPositiveButton(resources.getString(R.string.alert_neutral_button), null);
+                msg.show();
+            }
+        });
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("cpf", this.cpf);
+        result.put("email", this.email);
+        result.put("id", this.id);
+        result.put("imgUrl", this.imgUrl);
+        result.put("name", this.name);
+        result.put("password", this.password);
+
+        return result;
     }
 
     @Override

@@ -67,7 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textWebEmailAddress|textEmailSubject" />
+            android:enabled="false"
+            android:hapticFeedbackEnabled="false"
+            android:inputType="textWebEmailAddress|textEmailSubject"
+            android:saveEnabled="false" />
 
         <TextView
             android:id="@+id/textView6"
@@ -83,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="true"
             android:inputType="textPassword" />
 
         <TextView

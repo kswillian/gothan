@@ -5,13 +5,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +56,10 @@ public class ConfigurationFragment extends Fragment {
         editTextPassord = v.findViewById(R.id.editTextNewPassword);
         editTextConfPassord = v.findViewById(R.id.editTextNewPasswordConf);
         buttonAlter = v.findViewById(R.id.buttonAlterRegister);
+
+        editTextEmail.setEnabled(false);
+        editTextPassord.setEnabled(false);
+
     }
     public void initEvent(){
 
@@ -105,14 +114,13 @@ public class ConfigurationFragment extends Fragment {
             user.setCpf("");
             user.setImgUrl("");
             user.setYearsOld(0);
-
-            updateUser();
+            user.update(getResources(), getContext());
 
         }catch (Exception e){
 
             Alert.showAlert(
                     getActivity(),
-                    getResources().getString(R.string.alert_error_register_title),
+                    getResources().getString(R.string.alert_error_update_title),
                     e.getMessage(),
                     getResources().getString(R.string.alert_neutral_button)
             );
@@ -146,10 +154,6 @@ public class ConfigurationFragment extends Fragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-    }
-
-    public void updateUser(){
-
     }
 
 }

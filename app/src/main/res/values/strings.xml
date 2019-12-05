@@ -35,9 +35,11 @@
 
     <!-- Alert -->
     <string name="alert_error_register_title">Erro ao cadastrar</string>
+    <string name="alert_error_update_title">Erro ao realizar alteração</string>
     <string name="alert_error_login_title">Erro ao acessar</string>
     <string name="alert_sucess_register_title">Sucesso</string>
     <string name="alert_sucess_register_dec">Cadastro efetuado com sucesso!</string>
+    <string name="alert_sucess_register_update">Alteração efetuada com sucesso!</string>
     <string name="alert_neutral_button">OK</string>
 
     <!-- Alert Permission -->
